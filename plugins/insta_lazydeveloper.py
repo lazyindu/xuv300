@@ -17,6 +17,7 @@ from instaloader.exceptions import (
     BadResponseException,
     TooManyRequestsException,
 )
+from plugins.tiktok_x_lazydeveloper import download_from_lazy_tiktok_and_x
 
 async def initiliselazyinsta(Lazy, post_shortcode):
     post = instaloader.Post.from_shortcode(Lazy.context, post_shortcode)
@@ -97,7 +98,16 @@ async def download_from_lazy_instagram(client, message, url):
     except LoginRequiredException:
         await progress_message2.edit("🔑 This operation requires login. Please send me public urls")
     except BadResponseException:
-        await progress_message2.edit("⚠️ Instagram returned an unexpected response. Please try again.")
+        respond = await progress_message2.edit("⚠️ Instagram returned an unexpected response. Please try again.")
+        await client.send_chat_action(message.chat.id, enums.ChatAction.Typing)
+        lazydeveloperr = await client.send_message(message.chat.id, f"Changing algorithm...")
+        await asyncio.sleep(1)
+        await lazydeveloperr.edit(f"Trying with advance method...")
+        try:
+            asyncio.create_task(download_from_lazy_tiktok_and_x)
+            print(f"method changed for user {message.from_user.id} => url = {url}")
+        except Exception as lazyerror:
+            print(lazyerror)
     except TooManyRequestsException:
         await progress_message2.edit("⏳ Too many requests! Instagram is rate-limiting you. Please wait and try again.")
     except Exception as lze:

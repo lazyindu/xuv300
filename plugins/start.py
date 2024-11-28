@@ -1,11 +1,7 @@
 from asyncio import sleep
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply, CallbackQuery
-# from pyrogram.errors import FloodWait
-# import humanize
-# import random
-from helpers.txt import mr
-from helpers.database import db
+from lazydeveloper.database import db
 from config import *
 from plugins.LazyDev_F_Sub import lazy_force_sub, is_subscribed
 from script import Script

@@ -16,7 +16,9 @@ from pyrogram import enums
 from script import Script
 import time
 from collections import defaultdict
-from helpers.database import db
+from lazydeveloper.database import db
+from plugins.LazyDev_F_Sub import lazy_force_sub, is_subscribed
+
 user_tasks = {}
 # user_message_count = {}
 user_message_count = defaultdict(list)
@@ -33,8 +35,8 @@ async def handle_incoming_message(client: Client, message: Message):
         # Extract the message text and user ID
             # if user_id not in ADMIN:
             #     await client.send_message(chat_id=message.chat.id, text=f"Sorry Sweetheart! cant talk to you \nTake permission from my Lover @LazyDeveloperr")
-        if not await db.is_user_exist(user.id):
-            await db.add_user(user.id)
+        if not await db.is_user_exist(user_id):
+            await db.add_user(user_id)
 
         if (FORCE_SUB_CHANNEL or FORCE_SUB_CHANNEL2 or FORCE_SUB_CHANNEL3) and not await is_subscribed(client, message):
             # User is not subscribed to any of the required channels, trigger force_sub logic
@@ -75,8 +77,8 @@ async def handle_incoming_message(client: Client, message: Message):
         # Check if the user already has 3 active tasks
         if len(user_tasks[user_id]) >= MAXIMUM_TASK:
             await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
-            sorry_lazy_sms = await message.reply(f"⏳ You already have {MAXIMUM_TASK} active downloads. Please wait for one to finish before adding more.")
-            await asyncio.sleep(5)
+            sorry_lazy_sms = await message.reply(f"⏳ ʏᴏᴜ ᴀʟʀᴇᴀᴅʏ ʜᴀᴠᴇ {MAXIMUM_TASK} ᴀᴄᴛɪᴠᴇ ᴅᴏᴡɴʟᴏᴀᴅs. ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ ғᴏʀ ᴏɴᴇ ᴛᴏ ꜰɪɴɪsʜ ʙᴇғᴏʀᴇ ᴀddɪɴɢ ᴍᴏʀᴇ.")
+            await asyncio.sleep(10)
             await sorry_lazy_sms.delete()
             return
         

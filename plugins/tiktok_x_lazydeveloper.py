@@ -11,7 +11,7 @@ from pyrogram import enums
 from plugins.utitles import Mdata01
 from config import TEL_USERNAME, TG_NORMAL_MAX_SIZE
 
-from helpers.lazyprogress import progress_for_pyrogram
+from lazydeveloper.lazyprogress import progress_for_pyrogram
 from plugins.functions.help_ytdl import get_file_extension_from_url, get_resolution
 
 import yt_dlp
@@ -171,7 +171,7 @@ async def download_from_lazy_tiktok_and_x(client, message, url):
             video_file = ydl.prepare_filename(info_dict)
             try:
                 # print(f"processing vide0 send => {video_file}")
-                await send_video(client, message, info_dict, video_file, destination_folder, progress_message3)
+                await send_video(client, message, info_dict, video_file, destination_folder, progress_message2)
             except Exception as lazy:
                 print(f"Error in task => {lazy}")
     except Exception as e:
