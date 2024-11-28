@@ -99,7 +99,7 @@ async def download_from_lazy_instagram(client, message, url):
         await progress_message2.edit("🔑 This operation requires login. Please send me public urls")
     except BadResponseException:
         respond = await progress_message2.edit("⚠️ Instagram returned an unexpected response. Please try again.")
-        await client.send_chat_action(message.chat.id, enums.ChatAction.Typing)
+        await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
         lazydeveloperr = await client.send_message(message.chat.id, f"Changing algorithm...")
         await asyncio.sleep(1)
         await lazydeveloperr.edit(f"Trying with advance method...")
